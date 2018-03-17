@@ -7,8 +7,10 @@ class Tank :
   public GameObject
 {
 public:
-  Tank () : GameObject (true) {};
   ~Tank ();
+protected:
+  Tank (pair<int, int> coordinates, int health);
+  int health_;
 };
 
 #endif // !TANK_H

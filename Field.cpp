@@ -5,12 +5,17 @@ Field* Field::instance_ = nullptr;
 Field::Field ()
 {
 
-  field_ = new GameObject*[FIELD_SIZE];
+  field_ = new Cell*[FIELD_SIZE] ();
 
   for (auto i = 0; i < FIELD_SIZE; i++) {
-    field_[i] = new GameObject[FIELD_SIZE];
+    field_[i] = static_cast<Cell*>(operator new(sizeof (Cell) * FIELD_SIZE));
+
+    for (auto j = 0; j < FIELD_SIZE; j++) {
+      field_[i][j] = Cell (pair<int, int> (i, j));
+    }
   }
 
+  walls_ = createWalls ();
   player_ = createPlayer ();
   enemies_ = createEnemies ();
 }
@@ -18,7 +23,7 @@ Field::Field ()
 
 
 Field*
-Field::get ()
+Field::getInstance ()
 {
   if (!instance_)
     instance_ = new Field ();
@@ -28,11 +33,18 @@ Field::get ()
 
 
 
-GameObject&
-Field::add (const GameObject& gameObject, const pair<int, int> coordinates)
+Cell&
+Field::operator[](pair<int, int> indices) const
 {
-  field_[coordinates.first][coordinates.second] = gameObject;
-  return const_cast<GameObject&> (gameObject);
+  return field_[indices.first][indices.second];
+}
+
+
+
+Cell **
+Field::get () const
+{
+  return field_;
 }
 
 
@@ -40,36 +52,43 @@ Field::add (const GameObject& gameObject, const pair<int, int> coordinates)
 Wall *
 Field::createWalls ()
 {
-  auto enemyCoordinates = getEnemiesCoordinates ();
-  Enemy* enemies = new Enemy[N_WALLS];
-
-  for (auto i = 0; i < N_WALLS; i++) {
-    add (dynamic_cast<GameObject&>(enemies_[i]), enemyCoordinates[i]);
+  const auto N_WALL_BLOCKS = N_WALLS * WALL_SIZE;
+  auto wallCoordinates = getWallsCoordinates ();
+  Wall* walls = static_cast<Wall*>(operator new(sizeof (Wall) *
+                                                N_WALL_BLOCKS));
+  for (int i = 0; i < N_WALL_BLOCKS; i++) {
+    walls[i] = Wall (wallCoordinates[i]);
   }
-  return enemies;
+
+  for (auto i = 0; i < N_WALL_BLOCKS; i++) {
+    (*this)[wallCoordinates[i]].add (dynamic_cast<GameObject&>(walls[i]));
+  }
+  return walls;
 }
 
-Player
+
+
+Player*
 Field::createPlayer ()
 {
   auto playerCoordinates = pair<int, int> (FIELD_SIZE / 2, FIELD_SIZE - 1);
 
-  while (!field_[playerCoordinates.first][playerCoordinates.second].
-         isEmpty ()) {
+  while ((*this)[playerCoordinates].getContent () != nullptr) {
     --playerCoordinates.second;
   }
 
-  add (dynamic_cast<GameObject&>(*player_.get ()), playerCoordinates);
+  player_ = Player::get (playerCoordinates);
+  (*this)[playerCoordinates].add (dynamic_cast<GameObject&>(*player_));
   return player_;
 }
 
 
 
-const pair<int, int>*
+pair<int, int>*
 Field::getWallsCoordinates () const
 {
   const auto N_WALL_BLOCKS = N_WALLS * WALL_SIZE;
-  pair<int, int>* wallCoordinates;
+  auto wallCoordinates = randomizeWallsCoordinates ();
 
   auto wallBlocksPlaced = 0, allowedCoordinates = N_WALL_BLOCKS;
   while (N_WALL_BLOCKS != wallBlocksPlaced) {
@@ -79,16 +98,22 @@ Field::getWallsCoordinates () const
 
     for (auto i = 0; i < N_WALL_BLOCKS; i++) {
       for (auto j = i + 1; j < N_WALL_BLOCKS; j++) {
+        // Disabling diagonal blocks.
         if (wallCoordinates[i] == wallCoordinates[j] ||
-            (wallCoordinates[i].second + 1 == wallCoordinates[j].second &&
-             wallCoordinates[i].first - 1 == wallCoordinates[j].first ||
-             wallCoordinates[i].first + 1 == wallCoordinates[j].first)) {
+          (wallCoordinates[i].first - 1 == wallCoordinates[j].first ||
+           wallCoordinates[i].first + 1 == wallCoordinates[j].first &&
+           wallCoordinates[i].second + 1 == wallCoordinates[j].second ||
+           wallCoordinates[i].second - 1 == wallCoordinates[j].second)) {
           --allowedCoordinates;
+          break;
         }
       }
 
       if (N_WALL_BLOCKS == allowedCoordinates) {
         ++wallBlocksPlaced;
+      }
+      else {
+        break;
       }
     }
   }
@@ -105,14 +130,33 @@ Field::randomizeWallsCoordinates () const
   pair<int, int>* wallCoordinates = new pair<int, int>[N_WALL_BLOCKS];
 
   for (auto i = 0; i < N_WALL_BLOCKS; i += WALL_SIZE) {
-    wallCoordinates[i + 1].first =
-      wallCoordinates[i].first =
+    wallCoordinates[i + 1].first = wallCoordinates[i].first =
       rand () % FIELD_SIZE;
-    wallCoordinates[i + 1].second =
-      wallCoordinates[i].second =
+    wallCoordinates[i + 1].second = wallCoordinates[i].second =
       rand () % FIELD_SIZE;
+    bool isPossible[] = { true, true, true, true };
 
-    switch (rand () % N_WAYS) {
+    for (auto j = 0; j < N_WAYS; j++) {
+      if (wallCoordinates[i].first - 1 < 0) {
+        isPossible[LEFT] = false;
+      }
+      if (wallCoordinates[i].second - 1 < 0) {
+        isPossible[UP] = false;
+      }
+      if (wallCoordinates[i].first + 1 >= FIELD_SIZE) {
+        isPossible[RIGHT] = false;
+      }
+      if (wallCoordinates[i].second + 1 >= FIELD_SIZE) {
+        isPossible[DOWN] = false;
+      }
+    }
+
+    auto way = rand () % N_WAYS;
+    while (!isPossible[way]) {
+      way = rand () % N_WAYS;
+    }
+
+    switch (way) {
     case UP:
       --wallCoordinates[i + 1].second;
       break;
@@ -134,11 +178,11 @@ Field::randomizeWallsCoordinates () const
 
 
 
-const pair<int, int>*
+pair<int, int>*
 Field::getEnemiesCoordinates () const
 {
   const auto ALLOWED_DISTANCE = 2;
-  pair<int, int>* enemyCoordinates;
+  auto enemyCoordinates = randomizeEnemiesCoordinates ();
 
   auto enemiesPlaced = 0, allowedCoordinates = N_ENEMIES;
   while (N_ENEMIES != enemiesPlaced) {
@@ -152,18 +196,21 @@ Field::getEnemiesCoordinates () const
                                    enemyCoordinates[j].first),
           enemiesVectorY = abs (enemyCoordinates[i].second -
                                 enemyCoordinates[j].second);
-        const int DISTANCE = sqrt (pow (enemiesVectorX, 2) +
-                                   pow (enemiesVectorY, 2));
-
+        const int DISTANCE = static_cast<const int>(
+          sqrt (pow (enemiesVectorX, 2) +
+                pow (enemiesVectorY, 2)) - 1);
         if (DISTANCE < ALLOWED_DISTANCE) {
           --allowedCoordinates;
+          break;
         }
       }
 
-      if (field_[enemyCoordinates[i].first][enemyCoordinates[i].second].
-          isEmpty () &&
+      if ((*this)[enemyCoordinates[i]].getContent () == nullptr &&
           N_ENEMIES == allowedCoordinates) {
         ++enemiesPlaced;
+      }
+      else {
+        break;
       }
     }
   }
@@ -181,7 +228,8 @@ Field::randomizeEnemiesCoordinates () const
 
   for (auto i = 0; i < N_ENEMIES; i++) {
     enemyCoordinates[i].first = rand () % FIELD_SIZE;
-    enemyCoordinates[i].second = rand () % FIELD_SIZE * upperEnemiesPart;
+    enemyCoordinates[i].second = static_cast<int>(rand () % FIELD_SIZE *
+                                                  upperEnemiesPart);
   }
   return enemyCoordinates;
 }
@@ -192,10 +240,14 @@ Enemy*
 Field::createEnemies ()
 {
   auto enemyCoordinates = getEnemiesCoordinates ();
-  Enemy* enemies = new Enemy[N_ENEMIES];
+  Enemy* enemies = static_cast<Enemy*>(operator new(sizeof (Enemy) *
+                                                    N_ENEMIES));
+  for (int i = 0; i < N_ENEMIES; i++) {
+    enemies[i] = Enemy (enemyCoordinates[i]);
+  }
 
   for (auto i = 0; i < N_ENEMIES; i++) {
-    add (dynamic_cast<GameObject&>(enemies_[i]), enemyCoordinates[i]);
+    (*this)[enemyCoordinates[i]].add (dynamic_cast<GameObject&>(enemies[i]));
   }
   return enemies;
 }

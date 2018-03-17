@@ -6,10 +6,11 @@ class Player :
   public Tank
 {
 public:
-  Player () : Tank () {};
-  static Player* get ();
+  Player (pair<int, int> coordinates);
+  static Player* get (pair<int, int> coordinates);
   ~Player ();
 private:
+  static const int HEALTH = 3;
   static Player* instance_;
 };
 

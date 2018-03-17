@@ -1,15 +1,25 @@
 #include "GameObject.h"
 
-
-
-GameObject::GameObject ()
+GameObject::GameObject (pair<int, int> coordinates) : coordinates_ (coordinates)
 {
 }
 
-const bool GameObject::isEmpty () const
+
+
+pair<int, int>
+GameObject::getCoordinates () const
 {
-  return isEmpty_;
+  return coordinates_;
 }
+
+
+
+pair<int, int>
+GameObject::setCoordinates (pair<int, int> coordinates)
+{
+  return coordinates_ = coordinates;
+}
+
 
 
 GameObject::~GameObject ()

@@ -7,7 +7,7 @@ class Wall :
   public GameObject
 {
 public:
-  Wall () :GameObject (true) {};
+  Wall (pair<int, int> coordinates);
   ~Wall ();
 };
 

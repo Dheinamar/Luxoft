@@ -7,8 +7,10 @@ class Enemy :
   public Tank
 {
 public:
-  Enemy () : Tank () {};
+  Enemy (pair<int, int> coordinates);
   ~Enemy ();
+private:
+  static const int HEALTH = 1;
 };
 
 #endif // !ENEMY_H

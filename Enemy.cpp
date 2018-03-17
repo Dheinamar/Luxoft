@@ -1,10 +1,9 @@
 #include "Enemy.h"
 
-
-
-Enemy::Enemy ()
+Enemy::Enemy (pair<int, int> coordinates) : Tank(coordinates, Enemy::HEALTH)
 {
 }
+
 
 
 Enemy::~Enemy ()

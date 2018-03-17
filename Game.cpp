@@ -4,7 +4,7 @@ Game* Game::instance_ = nullptr;
 
 Game::Game ()
 {
-  field_.get ();
+  field_ = Field::getInstance ();
 }
 
 
@@ -16,6 +16,14 @@ Game::get ()
     instance_ = new Game ();
 
   return instance_;
+}
+
+
+
+Field
+Game::getField () const
+{
+  return *field_;
 }
 
 

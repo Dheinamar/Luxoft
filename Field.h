@@ -1,14 +1,10 @@
 #ifndef FIELD_H
 #define FIELD_H
 
-#include <utility>
-
-#include "GameObject.h"
+#include "Cell.h"
 #include "Wall.h"
 #include "Player.h"
 #include "Enemy.h"
-
-using namespace std;
 
 enum Way
 {
@@ -21,29 +17,30 @@ enum Way
 class Field
 {
 public:
-  Field ();
-  static Field* get ();
+  static const int FIELD_SIZE = 10;
 
-  GameObject& add (const GameObject &gameObject,
-                   const pair<int, int> coordinates);
+  Field ();
+  static Field* getInstance ();
+  Cell& operator[](pair<int, int> indices) const;
+
+  Cell** get () const;
 private:
-  const int N_WAYS = 4;
-  const int FIELD_SIZE = 10;
-  const int N_WALLS = 6;
-  const int WALL_SIZE = 2;
-  const int N_ENEMIES = 6;
+  static const int N_WAYS = 4;
+  static const int N_WALLS = 6;
+  static const int WALL_SIZE = 2;
+  static const int N_ENEMIES = 6;
 
   static Field* instance_;
-  GameObject** field_;
+  Cell** field_;
   Wall* walls_;
-  Player player_;
+  Player* player_;
   Enemy* enemies_;
 
   Wall* createWalls ();
-  Player createPlayer ();
-  const pair<int, int>* getWallsCoordinates () const;
+  Player* createPlayer ();
+  pair<int, int>* getWallsCoordinates () const;
   pair<int, int>* randomizeWallsCoordinates () const;
-  const pair<int, int>* getEnemiesCoordinates () const;
+  pair<int, int>* getEnemiesCoordinates () const;
   pair<int, int>* randomizeEnemiesCoordinates () const;
   Enemy* createEnemies ();
 };

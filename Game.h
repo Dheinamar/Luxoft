@@ -8,10 +8,11 @@ class Game
 public:
   Game ();
   static Game* get ();
+  Field getField () const;
   ~Game ();
 private:
   static Game* instance_;
-  Field field_;
+  Field* field_;
 };
 
 #endif // !GAME_H
