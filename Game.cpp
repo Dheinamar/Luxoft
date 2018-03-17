@@ -2,31 +2,24 @@
 
 Game* Game::instance_ = nullptr;
 
-Game::Game()
+Game::Game ()
 {
+  field_.get ();
 }
 
 
 
 Game*
-Game::get() {
+Game::get ()
+{
   if (!instance_)
-    instance_ = new Game();
+    instance_ = new Game ();
 
   return instance_;
 }
 
 
 
-Game::~Game()
+Game::~Game ()
 {
-}
-
-
-
-Player*
-Game::createPlayer() {
-  auto fieldSize = field_.getFieldSize();
-  field_.add(player_, fieldSize - 1, fieldSize / 2);
-  return &player_;
 }

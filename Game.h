@@ -6,15 +6,12 @@
 class Game
 {
 public:
-  Game();
-  static Game* get();
-  ~Game();
+  Game ();
+  static Game* get ();
+  ~Game ();
 private:
   static Game* instance_;
   Field field_;
-  Player player_;
-
-  Player* createPlayer();
 };
 
 #endif // !GAME_H
