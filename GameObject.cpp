@@ -1,6 +1,8 @@
 #include "GameObject.h"
+#include "Field.h"
 
-GameObject::GameObject (pair<int, int> coordinates) : coordinates_ (coordinates)
+GameObject::GameObject (pair<int, int> coordinates) :
+  coordinates_ (coordinates)
 {
 }
 
@@ -22,6 +24,14 @@ GameObject::setCoordinates (pair<int, int> coordinates)
 
 
 
+void GameObject::getDamaged (Projectile projectile)
+{
+  projectile.~Projectile ();
+}
+
+
+
 GameObject::~GameObject ()
 {
+  (*Field::getInstance ())[coordinates_].clear ();
 }

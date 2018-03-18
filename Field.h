@@ -1,18 +1,12 @@
 #ifndef FIELD_H
 #define FIELD_H
 
+#include <vector>
+
 #include "Cell.h"
 #include "Wall.h"
 #include "Player.h"
 #include "Enemy.h"
-
-enum Way
-{
-  UP = 0,
-  RIGHT,
-  DOWN,
-  LEFT
-};
 
 class Field
 {
@@ -24,6 +18,8 @@ public:
   Cell& operator[](pair<int, int> indices) const;
 
   Cell** get () const;
+  void addProjectile (const Projectile& projectile);
+  Player& getPlayer () const;
 private:
   static const int N_WAYS = 4;
   static const int N_WALLS = 6;
@@ -35,6 +31,7 @@ private:
   Wall* walls_;
   Player* player_;
   Enemy* enemies_;
+  vector<Projectile> projectiles_;
 
   Wall* createWalls ();
   Player* createPlayer ();

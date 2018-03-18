@@ -16,7 +16,7 @@ Cell::getContent () const
 
 
 GameObject*
-Cell::setContent (GameObject content)
+Cell::setContent (GameObject& content)
 {
   content_ = &content;
   return content_;
@@ -27,8 +27,15 @@ Cell::setContent (GameObject content)
 GameObject&
 Cell::add (const GameObject& gameObject)
 {
-  setContent (gameObject);
+  setContent (const_cast<GameObject&>(gameObject));
   return const_cast<GameObject&> (gameObject);
+}
+
+Cell &
+Cell::clear ()
+{
+  content_ = nullptr;
+  return *this;
 }
 
 

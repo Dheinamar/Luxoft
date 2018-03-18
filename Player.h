@@ -6,8 +6,8 @@ class Player :
   public Tank
 {
 public:
-  Player (pair<int, int> coordinates);
-  static Player* get (pair<int, int> coordinates);
+  Player (pair<int, int> coordinates, Way direction);
+  static Player* get (pair<int, int> coordinates, Way direction);
   ~Player ();
 private:
   static const int HEALTH = 3;

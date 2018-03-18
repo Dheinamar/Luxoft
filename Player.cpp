@@ -2,17 +2,18 @@
 
 Player* Player::instance_ = nullptr;
 
-Player::Player (pair<int, int> coordinates) : Tank(coordinates, Player::HEALTH)
+Player::Player (pair<int, int> coordinates, Way direction) :
+  Tank(coordinates, direction, Player::HEALTH)
 {
 }
 
 
 
 Player*
-Player::get (pair<int, int> coordinates)
+Player::get (pair<int, int> coordinates, Way direction)
 {
   if (!instance_)
-    instance_ = new Player (coordinates);
+    instance_ = new Player (coordinates, direction);
 
   return instance_;
 }

@@ -7,7 +7,7 @@ class Enemy :
   public Tank
 {
 public:
-  Enemy (pair<int, int> coordinates);
+  Enemy (pair<int, int> coordinates, Way direction);
   ~Enemy ();
 private:
   static const int HEALTH = 1;

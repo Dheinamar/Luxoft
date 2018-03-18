@@ -47,6 +47,16 @@ Field::get () const
   return field_;
 }
 
+void Field::addProjectile (const Projectile & projectile)
+{
+  projectiles_.push_back (projectile);
+}
+
+Player & Field::getPlayer () const
+{
+  return *player_;
+}
+
 
 
 Wall *
@@ -57,7 +67,7 @@ Field::createWalls ()
   Wall* walls = static_cast<Wall*>(operator new(sizeof (Wall) *
                                                 N_WALL_BLOCKS));
   for (int i = 0; i < N_WALL_BLOCKS; i++) {
-    walls[i] = Wall (wallCoordinates[i]);
+    walls[i] = *new Wall (wallCoordinates[i]);
   }
 
   for (auto i = 0; i < N_WALL_BLOCKS; i++) {
@@ -77,7 +87,7 @@ Field::createPlayer ()
     --playerCoordinates.second;
   }
 
-  player_ = Player::get (playerCoordinates);
+  player_ = Player::get (playerCoordinates, UP);
   (*this)[playerCoordinates].add (dynamic_cast<GameObject&>(*player_));
   return player_;
 }
@@ -243,7 +253,8 @@ Field::createEnemies ()
   Enemy* enemies = static_cast<Enemy*>(operator new(sizeof (Enemy) *
                                                     N_ENEMIES));
   for (int i = 0; i < N_ENEMIES; i++) {
-    enemies[i] = Enemy (enemyCoordinates[i]);
+    enemies[i] = Enemy (enemyCoordinates[i],
+                        static_cast<Way>(rand () % N_WAYS));
   }
 
   for (auto i = 0; i < N_ENEMIES; i++) {

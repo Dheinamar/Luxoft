@@ -1,6 +1,7 @@
 #include "Enemy.h"
 
-Enemy::Enemy (pair<int, int> coordinates) : Tank(coordinates, Enemy::HEALTH)
+Enemy::Enemy (pair<int, int> coordinates, Way direction) :
+  Tank(coordinates, direction, Enemy::HEALTH)
 {
 }
 
