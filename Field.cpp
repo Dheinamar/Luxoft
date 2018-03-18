@@ -14,10 +14,6 @@ Field::Field ()
       field_[i][j] = Cell (pair<int, int> (i, j));
     }
   }
-
-  walls_ = createWalls ();
-  player_ = createPlayer ();
-  enemies_ = createEnemies ();
 }
 
 
@@ -25,8 +21,13 @@ Field::Field ()
 Field*
 Field::getInstance ()
 {
-  if (!instance_)
+  if (!instance_) {
     instance_ = new Field ();
+
+    instance_->walls_ = instance_->createWalls ();
+    instance_->player_ = instance_->createPlayer ();
+    instance_->enemies_ = instance_->createEnemies ();
+  }
 
   return instance_;
 }
@@ -67,7 +68,7 @@ Field::createWalls ()
   Wall* walls = static_cast<Wall*>(operator new(sizeof (Wall) *
                                                 N_WALL_BLOCKS));
   for (int i = 0; i < N_WALL_BLOCKS; i++) {
-    walls[i] = *new Wall (wallCoordinates[i]);
+    walls[i] = Wall (wallCoordinates[i]);
   }
 
   for (auto i = 0; i < N_WALL_BLOCKS; i++) {
