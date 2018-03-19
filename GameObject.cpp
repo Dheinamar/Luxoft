@@ -2,7 +2,7 @@
 #include "Field.h"
 
 GameObject::GameObject (pair<int, int> coordinates) :
-  coordinates_ (coordinates)
+  coordinates_ (coordinates), team_ (NO_TEAM)
 {
 }
 
@@ -24,14 +24,22 @@ GameObject::setCoordinates (pair<int, int> coordinates)
 
 
 
-void GameObject::getDamaged (Projectile projectile)
+const int
+GameObject::getTeam () const
 {
-  projectile.~Projectile ();
+  return team_;
 }
 
 
 
 GameObject::~GameObject ()
 {
-  (*Field::getInstance ())[coordinates_].clear ();
+}
+
+
+
+void
+GameObject::getDamaged (Projectile projectile)
+{
+  projectile.~Projectile ();
 }

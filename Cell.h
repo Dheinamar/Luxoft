@@ -9,10 +9,10 @@ public:
   Cell (pair<int, int> coordinates);
 
   GameObject* getContent () const;
-  GameObject* setContent (GameObject& content);
+  GameObject* setContent (const GameObject* content);
   pair<int, int> getCoordinates () const;
 
-  GameObject& add (const GameObject& gameObject);
+  GameObject* add (const GameObject* gameObject);
   Cell& clear ();
 
   ~Cell ();

@@ -11,6 +11,7 @@ public:
   ~Enemy ();
 private:
   static const int HEALTH = 1;
+  static const int TEAM = 2;
 };
 
 #endif // !ENEMY_H

@@ -1,6 +1,15 @@
 #include "Tank.h"
 #include "Field.h"
 
+pair<int, int>
+Tank::setCoordinates (pair<int, int> coordinates)
+{
+  BigObject::coordinates_ = coordinates;
+  return MovingObject::coordinates_ = coordinates;
+}
+
+
+
 bool
 Tank::moveUp ()
 {
@@ -37,28 +46,11 @@ Tank::moveLeft ()
 
 
 
-void Tank::Shoot () const
+void
+Tank::shoot () const
 {
-  pair<int, int> projectileCoordinates = coordinates_;
-  switch (direction_) {
-  case UP:
-    --projectileCoordinates.second;
-    break;
-  case RIGHT:
-    ++projectileCoordinates.first;
-    break;
-  case DOWN:
-    ++projectileCoordinates.second;
-    break;
-  case LEFT:
-    --projectileCoordinates.first;
-    break;
-  default:
-    break;
-  }
-
-  auto projectile = Projectile (projectileCoordinates, direction_);
-  Field::getInstance ()->addProjectile (projectile);
+  auto shot = new Projectile (BigObject::coordinates_, direction_, this);
+  shot->moveForward ();
 }
 
 
@@ -66,11 +58,23 @@ void Tank::Shoot () const
 void
 Tank::getDamaged (Projectile projectile)
 {
-  GameObject::getDamaged (projectile);
+  BigObject::getDamaged (projectile);
   --health_;
   if (0 == health_) {
     this->~Tank ();
   }
+}
+
+
+
+bool
+Tank::moveForward ()
+{
+  (*Field::getInstance ())[MovingObject::coordinates_].clear ();
+  auto wasMoved = MovingObject::moveForward ();
+  (*Field::getInstance ())[MovingObject::coordinates_].
+    add (static_cast<BigObject*>(this));
+  return wasMoved;
 }
 
 
@@ -81,7 +85,8 @@ Tank::~Tank ()
 
 
 
-Tank::Tank (pair<int, int> coordinates, Way direction, int health) :
-  MovingObject (coordinates, direction), health_ (health)
+Tank::Tank (pair<int, int> coordinates, Way direction, int health, int team) :
+  MovingObject (coordinates, direction), BigObject (coordinates),
+  health_ (health), team_ (team)
 {
 }

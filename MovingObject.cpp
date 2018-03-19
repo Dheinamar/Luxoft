@@ -15,40 +15,36 @@ bool MovingObject::moveForward ()
   case UP:
     newCoordinates = pair<int, int> (coordinates_.first,
                                      coordinates_.second - 1);
-    if ((*Field::getInstance ())[newCoordinates].getContent () == nullptr) {
-      (*Field::getInstance ())[coordinates_].clear ();
+    if ((*Field::getInstance ())[newCoordinates].getContent () == nullptr ||
+        newCoordinates.second < 0) {
       setCoordinates (newCoordinates);
-      (*Field::getInstance ())[coordinates_].add (*this);
       return true;
     }
     break;
   case RIGHT:
     newCoordinates = pair<int, int> (coordinates_.first + 1,
                                      coordinates_.second);
-    if ((*Field::getInstance ())[newCoordinates].getContent () == nullptr) {
-      (*Field::getInstance ())[coordinates_].clear ();
+    if ((*Field::getInstance ())[newCoordinates].getContent () == nullptr ||
+        newCoordinates.first >=Field::FIELD_SIZE) {
       setCoordinates (newCoordinates);
-      (*Field::getInstance ())[coordinates_].add (*this);
       return true;
     }
     break;
   case DOWN:
     newCoordinates = pair<int, int> (coordinates_.first,
                                      coordinates_.second + 1);
-    if ((*Field::getInstance ())[newCoordinates].getContent () == nullptr) {
-      (*Field::getInstance ())[coordinates_].clear ();
+    if ((*Field::getInstance ())[newCoordinates].getContent () == nullptr ||
+        newCoordinates.second >= Field::FIELD_SIZE) {
       setCoordinates (newCoordinates);
-      (*Field::getInstance ())[coordinates_].add (*this);
       return true;
     }
     break;
   case LEFT:
     newCoordinates = pair<int, int> (coordinates_.first - 1,
                                      coordinates_.second);
-    if ((*Field::getInstance ())[newCoordinates].getContent () == nullptr) {
-      (*Field::getInstance ())[coordinates_].clear ();
+    if ((*Field::getInstance ())[newCoordinates].getContent () == nullptr ||
+        newCoordinates.first < 0) {
       setCoordinates (newCoordinates);
-      (*Field::getInstance ())[coordinates_].add (*this);
       return true;
     }
     break;

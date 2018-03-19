@@ -10,6 +10,7 @@ public:
   static Player* get (pair<int, int> coordinates, Way direction);
   ~Player ();
 private:
+  static const int TEAM = 1;
   static const int HEALTH = 3;
   static Player* instance_;
 };

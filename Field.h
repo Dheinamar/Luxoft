@@ -18,7 +18,8 @@ public:
   Cell& operator[](pair<int, int> indices) const;
 
   Cell** get () const;
-  void addProjectile (const Projectile& projectile);
+  void addProjectile (const Projectile* projectile);
+  void removeProjectile (Projectile* projectile);
   Player& getPlayer () const;
 private:
   static const int N_WAYS = 4;
@@ -31,7 +32,7 @@ private:
   Wall* walls_;
   Player* player_;
   Enemy* enemies_;
-  vector<Projectile> projectiles_;
+  vector<Projectile*> projectiles_;
 
   Wall* createWalls ();
   Player* createPlayer ();

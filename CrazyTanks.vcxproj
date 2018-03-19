@@ -119,10 +119,12 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="BigObject.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="MovingObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="SmallObject.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
@@ -131,11 +133,13 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="BigObject.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="SmallObject.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>

@@ -16,6 +16,7 @@ class MovingObject :
 {
 public:
   MovingObject (pair<int, int> coordinates, Way direction);
+  virtual pair<int, int> setCoordinates (pair<int, int> coordinates) = 0;
   bool moveForward ();
   ~MovingObject ();
 protected:

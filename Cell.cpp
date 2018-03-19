@@ -16,19 +16,19 @@ Cell::getContent () const
 
 
 GameObject*
-Cell::setContent (GameObject& content)
+Cell::setContent (const GameObject* content)
 {
-  content_ = &content;
+  content_ = const_cast<GameObject*>(content);
   return content_;
 }
 
 
 
-GameObject&
-Cell::add (const GameObject& gameObject)
+GameObject*
+Cell::add (const GameObject* gameObject)
 {
-  setContent (const_cast<GameObject&>(gameObject));
-  return const_cast<GameObject&> (gameObject);
+  setContent (gameObject);
+  return const_cast<GameObject*> (gameObject);
 }
 
 Cell &

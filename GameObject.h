@@ -12,9 +12,14 @@ public:
   GameObject (pair<int, int> coordinates);
   pair<int, int> getCoordinates () const;
   pair<int, int> setCoordinates (pair<int, int> coordinates);
-  void getDamaged (Projectile projectile);
+  const int getTeam () const;
   ~GameObject ();
+
+  void getDamaged (Projectile projectile);
 protected:
+  static const int NO_TEAM = -1;
+
+  int team_;
   pair<int, int> coordinates_;
 };
 

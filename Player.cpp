@@ -3,7 +3,7 @@
 Player* Player::instance_ = nullptr;
 
 Player::Player (pair<int, int> coordinates, Way direction) :
-  Tank(coordinates, direction, Player::HEALTH)
+  Tank(coordinates, direction, Player::HEALTH, Player::TEAM)
 {
 }
 
