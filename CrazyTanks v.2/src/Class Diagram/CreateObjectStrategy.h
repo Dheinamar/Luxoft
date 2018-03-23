@@ -17,7 +17,6 @@ public:
     
     /**
      * @param prototype
-     * @param count
      */
     virtual vector<GameObject> CreateObject(const GameObject& prototype) = 0;
 };
