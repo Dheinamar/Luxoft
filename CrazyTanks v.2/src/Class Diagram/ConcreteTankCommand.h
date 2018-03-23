@@ -13,10 +13,15 @@
 
 using namespace std;
 
-class ConcreteTankCommand: public TankCommand {
-private: 
-    unique_ptr<Tank> receiver_;
-	void execute (Command command) const override;
+class ConcreteTankCommand : public TankCommand
+{
+public:
+
+  ConcreteTankCommand (const Tank& receiver);
+
+  void execute (Command command) const override;
+private:
+  unique_ptr<Tank> receiver_;
 };
 
 #endif //_CONCRETETANKCOMMAND_H

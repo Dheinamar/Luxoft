@@ -145,25 +145,18 @@
     <ClCompile Include="..\Class Diagram\Cell.cpp" />
     <ClCompile Include="..\Class Diagram\ConcreteTankCommand.cpp" />
     <ClCompile Include="..\Class Diagram\CreateEnemyStrategy.cpp" />
-    <ClCompile Include="..\Class Diagram\CreateObjectStrategy.cpp" />
     <ClCompile Include="..\Class Diagram\CreateWallStrategy.cpp" />
     <ClCompile Include="..\Class Diagram\DrawEnemyStrategy.cpp" />
     <ClCompile Include="..\Class Diagram\Drawer.cpp" />
     <ClCompile Include="..\Class Diagram\DrawGoldStrategy.cpp" />
-    <ClCompile Include="..\Class Diagram\DrawInfo.cpp" />
-    <ClCompile Include="..\Class Diagram\DrawObjectStrategy.cpp" />
     <ClCompile Include="..\Class Diagram\DrawPlayerStrategy.cpp" />
     <ClCompile Include="..\Class Diagram\DrawProjectileStrategy.cpp" />
     <ClCompile Include="..\Class Diagram\DrawWallStrategy.cpp" />
     <ClCompile Include="..\Class Diagram\Field.cpp" />
     <ClCompile Include="..\Class Diagram\Game.cpp" />
-    <ClCompile Include="..\Class Diagram\GameObject.cpp" />
     <ClCompile Include="..\Class Diagram\Gold.cpp" />
-    <ClCompile Include="..\Class Diagram\MovingObject.cpp" />
-    <ClCompile Include="..\Class Diagram\Projectile.cpp" />
     <ClCompile Include="..\Class Diagram\Shell.cpp" />
     <ClCompile Include="..\Class Diagram\Tank.cpp" />
-    <ClCompile Include="..\Class Diagram\TankCommand.cpp" />
     <ClCompile Include="..\Class Diagram\Wall.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -15,7 +15,8 @@ using namespace std;
 
 class Cell {
 public: 
-    
+	Cell (pair<int, int> coordinates);
+
 	shared_ptr<GameObject> getContent() const;
     
     /**

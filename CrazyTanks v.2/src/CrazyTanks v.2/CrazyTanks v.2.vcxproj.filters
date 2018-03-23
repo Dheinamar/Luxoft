@@ -101,9 +101,6 @@
     <ClCompile Include="..\Class Diagram\CreateEnemyStrategy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Class Diagram\CreateObjectStrategy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Class Diagram\CreateWallStrategy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -114,12 +111,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Class Diagram\DrawGoldStrategy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Class Diagram\DrawInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Class Diagram\DrawObjectStrategy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Class Diagram\DrawPlayerStrategy.cpp">
@@ -137,25 +128,13 @@
     <ClCompile Include="..\Class Diagram\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Class Diagram\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Class Diagram\Gold.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Class Diagram\MovingObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Class Diagram\Projectile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Class Diagram\Shell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Class Diagram\Tank.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Class Diagram\TankCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Class Diagram\Wall.cpp">

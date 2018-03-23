@@ -10,6 +10,11 @@
  */
 
 
+Cell::Cell (pair<int, int> coordinates) :
+	COORDINATES_ (coordinates), content_ (nullptr)
+{
+}
+
 shared_ptr<GameObject>
 Cell::getContent() const {
 	return content_;

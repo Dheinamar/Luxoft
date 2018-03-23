@@ -20,7 +20,7 @@
 class Field: public DrawInfo {
 public: 
     
-    void getField();
+    Cell** getField();
     
     static unique_ptr<Field> getInstance();
     
@@ -53,6 +53,8 @@ public:
      * @param wall
      */
     void removeWall(const Wall wall);
+
+    Cell& operator[](pair<int, int> indices) const;
 private: 
     static const int FIELD_SIZE = 10;
     static const int N_WAYS = 4;
@@ -71,7 +73,7 @@ private:
     /**
      * @param strategy
      */
-    void SetCreationStrategy(const CreateObjectStrategy strategy);
+    void SetCreationStrategy(const CreateObjectStrategy& strategy);
 };
 
 #endif //_FIELD_H
