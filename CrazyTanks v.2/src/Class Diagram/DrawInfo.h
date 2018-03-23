@@ -11,9 +11,9 @@ public:
     
     virtual void getProjectiles() = 0;
     
-    virtual vector<Tank> getEnemies() = 0;
+    virtual const vector<Tank> getEnemies() const = 0;
     
-    virtual void getWalls() = 0;
+    virtual const vector<Wall> getWalls() const = 0;
     
     virtual void getGold() = 0;
     

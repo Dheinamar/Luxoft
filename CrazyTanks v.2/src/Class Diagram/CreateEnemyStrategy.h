@@ -14,7 +14,7 @@ class CreateEnemyStrategy : public CreateObjectStrategy
 {
 public:
 
-  GameObject& CreateObject (const GameObject& prototype) override;
+  vector<GameObject> CreateObject (const GameObject& prototype) override;
 private:
 
   pair<int, int> getEnemyCoordinates () const;

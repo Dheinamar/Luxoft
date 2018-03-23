@@ -9,13 +9,13 @@
   * CreateEnemyStrategy implementation
   */
 
-GameObject&
+vector<GameObject>
 CreateEnemyStrategy::CreateObject (const GameObject& prototype)
 {
   auto coordinates = getEnemyCoordinates ();
-  Tank created;
+  vector<GameObject> created;
 
-  created = new Tank (const_cast<GameObject&>(prototype).clone (coordinates));
+  created.push_back(const_cast<GameObject&>(prototype).clone (coordinates));
 
   return created;
 }

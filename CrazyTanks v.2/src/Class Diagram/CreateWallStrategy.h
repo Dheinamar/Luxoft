@@ -8,14 +8,16 @@
 
 #include "CreateObjectStrategy.h"
 #include "Field.h"
+#include "Way.h"
 
 
 class CreateWallStrategy: public CreateObjectStrategy {
 public:
-  vector<GameObject> CreateObject (const GameObject& prototype,
-                                   const int count) override;
+  vector<GameObject> CreateObject (const GameObject& prototype) override;
 private:
-  vector<pair<int, int>> getWallsCoordinates () const;
+  static const int N_WAYS = 4;
+  vector<pair<int, int>> getWallCoordinates () const;
+  vector<pair<int, int>> randomizeWallCoordinates (int wallSize) const;
 };
 
 #endif //_CREATEWALLSTRATEGY_H

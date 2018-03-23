@@ -19,7 +19,7 @@ public:
      * @param prototype
      * @param count
      */
-    virtual GameObject& CreateObject(const GameObject& prototype) = 0;
+    virtual vector<GameObject> CreateObject(const GameObject& prototype) = 0;
 };
 
 #endif //_CREATEOBJECTSTRATEGY_H

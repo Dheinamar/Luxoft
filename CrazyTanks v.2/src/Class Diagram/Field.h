@@ -54,6 +54,8 @@ public:
      */
     void removeWall(const Wall wall);
 
+    const int getWallSize () const;
+
     Cell& operator[](pair<int, int> indices) const;
 private: 
     static const int FIELD_SIZE = 10;
