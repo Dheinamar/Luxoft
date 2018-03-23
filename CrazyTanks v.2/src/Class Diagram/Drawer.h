@@ -11,8 +11,6 @@
 #include <gdiplus.h>
 #include <windows.h>
 
-#pragma comment(lib, "gdiplus.lib")
-
 #include "DrawObjectStrategy.h"
 #include "DrawInfo.h"
 
@@ -22,6 +20,8 @@ using namespace Gdiplus;
 class Drawer
 {
 public:
+
+  Drawer (DrawInfo& drawInfo);
 
   void drawField ();
 

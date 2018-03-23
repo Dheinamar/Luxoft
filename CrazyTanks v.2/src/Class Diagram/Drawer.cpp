@@ -5,18 +5,30 @@
 
 #include "Drawer.h"
 
-/**
- * Drawer implementation
- */
+ /**
+  * Drawer implementation
+  */
 
 
-/**
- * @param strategy
- */
-void Drawer::setDrawStrategy(void strategy) {
+  /**
+   * @param strategy
+   */
+void
+Drawer::setDrawStrategy (const DrawObjectStrategy& strategy)
+{
 
 }
 
-void Drawer::drawField() {
+Drawer::Drawer (DrawInfo& drawInfo) : drawInfo_(&drawInfo)
+{
+  HWND hWnd = GetConsoleWindow ();
+  PAINTSTRUCT  ps;
+  HDC hDC = BeginPaint (hWnd, &ps);
+  Graphics graphics (hDC);
+  graphics_ (graphics);
+}
+
+void Drawer::drawField ()
+{
 
 }
