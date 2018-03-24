@@ -13,10 +13,9 @@ DrawEnemyStrategy::DrawEnemyStrategy () :size_ (pair<int, int> (30, 30))
 {}
 
 void
-DrawEnemyStrategy::drawObject (const pair<int, int> coordinates)
+DrawEnemyStrategy::drawObject (const pair<int, int> coordinates,
+                               Graphics graphics, const Pen pen)
 {
-  Drawer::getInstance ()->getGraphics ().
-    DrawRectangle (Drawer::getInstance ()->drawRed (),
-                   coordinates.first, coordinates.second,
-                   size_.first, size_.second);
+  graphics.DrawRectangle (&pen, coordinates.first, coordinates.second,
+                          size_.first, size_.second);
 }

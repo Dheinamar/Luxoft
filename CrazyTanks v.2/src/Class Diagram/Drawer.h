@@ -21,16 +21,16 @@ class Drawer
 {
 public:
 
-  Drawer (DrawInfo& drawInfo, HWND hWnd, PAINTSTRUCT ps);
+  Drawer (const DrawInfo& drawInfo, const HDC hdc);
 
   void drawField ();
 
 
-  Graphics getGraphics () const;
+  Graphics& getGraphics () const;
 
-  Pen* drawRed () const;
+  const Pen& drawRed () const;
 
-  static unique_ptr<Drawer> getInstance ();
+  static unique_ptr<Drawer>& getInstance (const DrawInfo& drawInfo);
 private:
 
   /**
@@ -39,10 +39,12 @@ private:
   void setDrawStrategy (const DrawObjectStrategy& strategy);
 private:
   static unique_ptr<Drawer> instance_;
+  HDC context;
+  HDC memoryContext;
   Graphics graphics_;
-  const Pen red = Color(255, 255, 0, 0);
+  const Pen RED = Color(255, 255, 0, 0);
   unique_ptr<DrawInfo> drawInfo_;
-  unique_ptr<DrawObjectStrategy> drawStrategy;
+  unique_ptr<DrawObjectStrategy> drawStrategy_;
 };
 
 #endif //_DRAWER_H
