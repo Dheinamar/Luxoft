@@ -14,7 +14,7 @@ class DrawEnemyStrategy: public DrawObjectStrategy {
 public:
   DrawEnemyStrategy ();
   void drawObject (const pair<int, int> coordinates,
-                   Graphics graphics, const Pen pen) override;
+                   Graphics& graphics, const Pen& pen) override;
 private:
   const pair<int, int> size_;
 };

@@ -10,6 +10,8 @@
 
 
 class DrawProjectileStrategy: public DrawObjectStrategy {
+  void drawObject (const pair<int, int> coordinates,
+                   Graphics& graphics, const Pen& pen) override;
 };
 
 #endif //_DRAWPROJECTILESTRATEGY_H
