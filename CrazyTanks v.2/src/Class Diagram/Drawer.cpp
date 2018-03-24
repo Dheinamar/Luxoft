@@ -19,16 +19,18 @@ Drawer::setDrawStrategy (const DrawObjectStrategy& strategy)
 
 }
 
-Drawer::Drawer (DrawInfo& drawInfo) : drawInfo_(&drawInfo)
+Drawer::Drawer (DrawInfo& drawInfo, HWND hWnd, PAINTSTRUCT  ps) :
+  drawInfo_(&drawInfo), graphics_(BeginPaint (hWnd, &ps))
 {
-  HWND hWnd = GetConsoleWindow ();
-  PAINTSTRUCT  ps;
-  HDC hDC = BeginPaint (hWnd, &ps);
-  Graphics graphics (hDC);
-  graphics_ (graphics);
+  
 }
 
 void Drawer::drawField ()
 {
 
+}
+
+Graphics Drawer::getGraphics () const
+{
+  return graphics_;
 }

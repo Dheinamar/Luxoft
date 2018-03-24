@@ -21,7 +21,7 @@ class Drawer
 {
 public:
 
-  Drawer (DrawInfo& drawInfo);
+  Drawer (DrawInfo& drawInfo, HWND hWnd, PAINTSTRUCT ps);
 
   void drawField ();
 
@@ -40,7 +40,7 @@ private:
 private:
   static unique_ptr<Drawer> instance_;
   Graphics graphics_;
-  const Pen red;
+  const Pen red = Color(255, 255, 0, 0);
   unique_ptr<DrawInfo> drawInfo_;
   unique_ptr<DrawObjectStrategy> drawStrategy;
 };
