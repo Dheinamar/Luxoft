@@ -30,6 +30,8 @@ public:
 
   void drawField ();
 
+  void drawUi ();
+
 
   Graphics& getGraphics () const;
 
@@ -50,7 +52,9 @@ private:
   const Pen BLUE = Pen (Color::Blue);
   const Pen BLACK = Pen (Color::Black);
   const Pen GRAY = Pen (Color::Gray);
-  const pair<int, int> FIELD_START = pair<int, int>(15, 15);
+  const Pen WHITE = Pen (Color::White);
+  const int FIELD_BORDER = 15;
+  const int CAPTION_SIZE = 35;
   const int CELL_SIZE = 40;
   unique_ptr<DrawInfo> drawInfo_;
   unique_ptr<DrawObjectStrategy> drawStrategy_;
