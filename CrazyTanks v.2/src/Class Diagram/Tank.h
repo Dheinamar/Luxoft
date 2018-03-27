@@ -25,13 +25,15 @@ public:
   
   pair<int, int> getCoordinates () const override;
 
+  Way getWay () const override;
+
   pair<int, int> setCoordinates (const pair<int, int> coordinates) override;
 
   void getDamaged (Projectile& projectile) override;
 
   GameObject& clone (pair<int, int> coordinates) override;
 
-  const int getHealth () const;
+  const int getHealth () const; 
 
 protected:
   void moveForward () override;

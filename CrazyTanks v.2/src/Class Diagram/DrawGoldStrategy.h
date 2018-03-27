@@ -13,10 +13,11 @@
 
 using namespace Gdiplus;
 
-class DrawGoldStrategy: public DrawObjectStrategy {
+class DrawGoldStrategy : public DrawObjectStrategy
+{
 public:
   DrawGoldStrategy ();
-  void drawObject (const pair<int, int> coordinates,
+  void drawObject (const pair<int, int> coordinates, Way way,
                    Graphics& graphics, const Pen& pen) override;
 private:
   const pair<int, int> SIZE;

@@ -2,6 +2,7 @@
  * Project CrazyTanks
  */
 
+#define _CRT_SECURE_NO_WARNINGS
 
 #include "Drawer.h"
 
@@ -23,14 +24,18 @@ void
 Drawer::drawObject (const GameObject& gameObject, const Pen& pen)
 {
   auto coordinates = gameObject.getCoordinates ();
+  auto way = gameObject.getWay ();
   coordinates.first = coordinates.first * CELL_SIZE + FIELD_BORDER;
   coordinates.second = coordinates.second * CELL_SIZE + FIELD_BORDER;
-  drawStrategy_->drawObject (coordinates, graphics_, pen);
+  drawStrategy_->drawObject (coordinates, way, graphics_, pen);
 }
 
 Drawer::Drawer (const DrawInfo& drawInfo, const HDC hdc, const HDC bufferHdc) :
   drawInfo_ (unique_ptr<DrawInfo> (const_cast<DrawInfo*>(&drawInfo))),
-  graphics_ (bufferHdc), hdc_ (hdc), bufferHdc_ (bufferHdc)
+  graphics_ (bufferHdc), hdc_ (hdc), bufferHdc_ (bufferHdc),
+  RED (Color (255, 0, 0)), GOLD (Color (255, 215, 0)),
+  BLUE (Color (0, 0, 255)), BLACK (Color (0, 0, 0)),
+  GRAY (Color (128, 128, 128)), WHITE (Color (255, 255, 255))
 {}
 
 void
@@ -53,7 +58,7 @@ Drawer::drawField ()
   auto projectiles = drawInfo_->getProjectiles ();
   setDrawStrategy (DrawProjectileStrategy ());
   for (auto i = 0; i < projectiles.size (); ++i) {
-    drawObject (projectiles[i], BLACK);
+    drawObject (dynamic_cast<GameObject&>(projectiles[i]), BLACK);
   }
 
   auto walls = drawInfo_->getWalls ();
@@ -127,7 +132,7 @@ void Drawer::drawUi ()
 void Drawer::drawStats ()
 {
   const auto FIELD_SIZE = drawInfo_->getSize ();
-  char* health, * score, * time;
+  char* health, *score, *time;
   _itoa (drawInfo_->getPlayer ().getHealth (), health, 10);
   _itoa (drawInfo_->getMaxEnemies (), score, 10);
   _itoa (drawInfo_->getTime (), time, 10);

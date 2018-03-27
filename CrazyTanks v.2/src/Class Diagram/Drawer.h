@@ -49,12 +49,12 @@ private:
   HDC hdc_;
   HDC bufferHdc_;
   Graphics graphics_;
-  const Pen RED = Pen(Color::Red);
-  const Pen GOLD = Pen (Color::Gold);
-  const Pen BLUE = Pen (Color::Blue);
-  const Pen BLACK = Pen (Color::Black);
-  const Pen GRAY = Pen (Color::Gray);
-  const Pen WHITE = Pen (Color::White);
+  const Pen RED;
+  const Pen GOLD;
+  const Pen BLUE;
+  const Pen BLACK;
+  const Pen GRAY;
+  const Pen WHITE;
   const int FIELD_BORDER = 15;
   const int CAPTION_SIZE = 35;
   const int CELL_SIZE = 40;

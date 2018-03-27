@@ -9,9 +9,14 @@
 #include "DrawObjectStrategy.h"
 
 
-class DrawWallStrategy: public DrawObjectStrategy {
-  void drawObject (const pair<int, int> coordinates,
+class DrawWallStrategy : public DrawObjectStrategy
+{
+public:
+  DrawWallStrategy ();
+  void drawObject (const pair<int, int> coordinates, Way way,
                    Graphics& graphics, const Pen& pen) override;
+private:
+  const pair<int, int> SIZE;
 };
 
 #endif //_DRAWWALLSTRATEGY_H

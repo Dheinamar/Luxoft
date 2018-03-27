@@ -9,6 +9,7 @@
 #include <utility>
 
 #include "Projectile.h"
+#include "Way.h"
 
 using namespace std;
 
@@ -21,6 +22,8 @@ public:
      * @param coordinates
      */
     virtual pair<int, int> setCoordinates(const pair<int, int> coordinates) = 0;
+
+    virtual Way getWay () const = 0;
     
     /**
      * @param projectile

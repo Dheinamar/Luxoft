@@ -15,6 +15,8 @@ public:
 
   pair<int, int> getCoordinates () const override;
 
+  Way getWay () const override;
+
   /**
   * @param coordinates
   */

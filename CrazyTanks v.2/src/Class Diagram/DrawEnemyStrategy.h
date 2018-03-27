@@ -9,14 +9,16 @@
 #include "DrawObjectStrategy.h"
 #include "Drawer.h"
 
-
-class DrawEnemyStrategy: public DrawObjectStrategy {
+class DrawEnemyStrategy : public DrawObjectStrategy
+{
 public:
   DrawEnemyStrategy ();
-  void drawObject (const pair<int, int> coordinates,
+  void drawObject (const pair<int, int> coordinates, Way way,
                    Graphics& graphics, const Pen& pen) override;
 private:
   const pair<int, int> SIZE;
+  const pair<int, int> TURRET_SIZE;
+  const Pen BLACK;
 };
 
 #endif //_DRAWENEMYSTRATEGY_H

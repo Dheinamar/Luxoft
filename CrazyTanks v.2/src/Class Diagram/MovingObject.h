@@ -9,10 +9,11 @@
 #include "GameObject.h"
 
 
-class MovingObject: public GameObject {
-public: 
-    
-    virtual void moveForward() = 0;
+class MovingObject : public GameObject
+{
+public:
+
+  virtual void moveForward () = 0;
 };
 
 #endif //_MOVINGOBJECT_H
