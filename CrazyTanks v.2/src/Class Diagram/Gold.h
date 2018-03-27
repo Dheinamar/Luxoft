@@ -23,7 +23,7 @@ public:
   /**
   * @param projectile
   */
-  void getDamaged (Projectile projectile) override;
+  void getDamaged (Projectile& projectile) override;
 
   GameObject& clone (pair<int, int> coordinates) override;
 

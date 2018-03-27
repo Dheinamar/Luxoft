@@ -32,6 +32,8 @@ public:
 
   void drawUi ();
 
+  void drawStats ();
+
 
   Graphics& getGraphics () const;
 

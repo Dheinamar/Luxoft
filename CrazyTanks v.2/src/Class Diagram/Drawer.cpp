@@ -91,6 +91,8 @@ void Drawer::drawUi ()
                            FIELD_SIZE * CELL_SIZE + FIELD_BORDER,
                            FIELD_SIZE * CELL_SIZE + FIELD_BORDER * 2,
                            FIELD_BORDER);
+
+  // UI captions' column.
   RECT
     healthCaption = { FIELD_SIZE * CELL_SIZE + FIELD_BORDER * 3,
     FIELD_BORDER,
@@ -118,6 +120,46 @@ void Drawer::drawUi ()
             "Time",
             -1,
             &timeCaption,
+            DT_SINGLELINE | DT_RIGHT | DT_TOP);
+
+}
+
+void Drawer::drawStats ()
+{
+  const auto FIELD_SIZE = drawInfo_->getSize ();
+  char* health, * score, * time;
+  _itoa (drawInfo_->getPlayer ().getHealth (), health, 10);
+  _itoa (drawInfo_->getMaxEnemies (), score, 10);
+  _itoa (drawInfo_->getTime (), time, 10);
+
+  // UI stats' column.
+  RECT
+    healthStat = { FIELD_SIZE * CELL_SIZE + FIELD_BORDER * 4 + CAPTION_SIZE,
+    FIELD_BORDER,
+    FIELD_SIZE * CELL_SIZE + FIELD_BORDER * 4 + CAPTION_SIZE * 2,
+    FIELD_BORDER + CAPTION_SIZE },
+    scoreStat = { FIELD_SIZE * CELL_SIZE + FIELD_BORDER * 4 + CAPTION_SIZE,
+    (FIELD_BORDER + CAPTION_SIZE) + FIELD_BORDER,
+    FIELD_SIZE * CELL_SIZE + FIELD_BORDER * 4 + CAPTION_SIZE * 2,
+    (FIELD_BORDER + CAPTION_SIZE) * 2 },
+    timeStat = { FIELD_SIZE * CELL_SIZE + FIELD_BORDER * 4 + CAPTION_SIZE,
+    (FIELD_BORDER + CAPTION_SIZE) * 2 + FIELD_BORDER,
+    FIELD_SIZE * CELL_SIZE + FIELD_BORDER * 4 + CAPTION_SIZE * 2,
+    (FIELD_BORDER + CAPTION_SIZE) * 3 };
+  DrawText (bufferHdc_,
+            health,
+            -1,
+            &healthStat,
+            DT_SINGLELINE | DT_RIGHT | DT_TOP);
+  DrawText (bufferHdc_,
+            score,
+            -1,
+            &scoreStat,
+            DT_SINGLELINE | DT_RIGHT | DT_TOP);
+  DrawText (bufferHdc_,
+            time,
+            -1,
+            &timeStat,
             DT_SINGLELINE | DT_RIGHT | DT_TOP);
 
 }

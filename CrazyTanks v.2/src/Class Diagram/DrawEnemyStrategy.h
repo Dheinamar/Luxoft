@@ -16,7 +16,7 @@ public:
   void drawObject (const pair<int, int> coordinates,
                    Graphics& graphics, const Pen& pen) override;
 private:
-  const pair<int, int> size_;
+  const pair<int, int> SIZE;
 };
 
 #endif //_DRAWENEMYSTRATEGY_H

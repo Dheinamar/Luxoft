@@ -25,7 +25,7 @@ public:
     /**
      * @param projectile
      */
-    virtual void getDamaged(Projectile projectile) = 0;
+    virtual void getDamaged(Projectile& projectile) = 0;
     
     virtual GameObject& clone(pair<int, int> coordinates) = 0;
 };
