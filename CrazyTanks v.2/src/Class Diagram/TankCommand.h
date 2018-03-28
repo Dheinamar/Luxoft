@@ -14,7 +14,9 @@ public:
     /**
      * @param command
      */
-    virtual void execute(const Command command) const = 0;
+  virtual void execute (const Command command) const = 0;
+
+  virtual const Tank& getReceiver () const = 0;
 };
 
 #endif //_TANKCOMMAND_H

@@ -114,7 +114,7 @@ Field::operator[](pair<int, int> indices) const
 void
 Field::SetCreationStrategy (const CreateObjectStrategy& strategy)
 {
-  creationStrategy_.reset(const_cast<CreateObjectStrategy*>(&strategy));
+  creationStrategy_.reset (const_cast<CreateObjectStrategy*>(&strategy));
 }
 
 void Field::createFortress ()
@@ -147,7 +147,7 @@ Field::Field ()
   SetCreationStrategy (CreateWallStrategy ());
   for (auto i = 0; i < N_WALLS; i++) {
     auto wall = creationStrategy_->CreateObject (walls_[0]);
-    for (auto j = wall.begin(); j != wall.end(); j++) {
+    for (auto j = wall.begin (); j != wall.end (); j++) {
       addWall (dynamic_cast<Wall&>(*j));
     }
   }

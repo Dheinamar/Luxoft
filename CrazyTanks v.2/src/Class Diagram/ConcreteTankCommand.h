@@ -20,6 +20,8 @@ public:
   ConcreteTankCommand (const Tank& receiver);
 
   void execute (Command command) const override;
+
+  const Tank& getReceiver () const override;
 private:
   unique_ptr<Tank> receiver_;
 };
