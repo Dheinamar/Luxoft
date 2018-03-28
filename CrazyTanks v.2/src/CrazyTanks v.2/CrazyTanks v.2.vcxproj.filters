@@ -75,9 +75,6 @@
     <ClInclude Include="..\Class Diagram\Projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Class Diagram\Shell.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Class Diagram\Tank.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -128,9 +125,6 @@
     <ClCompile Include="..\Class Diagram\Gold.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Class Diagram\Shell.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Class Diagram\Tank.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -138,6 +132,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Class Diagram\DrawEnemyStrategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Class Diagram\Projectile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

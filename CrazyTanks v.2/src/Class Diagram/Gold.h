@@ -32,6 +32,8 @@ public:
   GameObject& clone (pair<int, int> coordinates) override;
 
   static unique_ptr<Gold> getInstance ();
+
+  bool operator==(const GameObject& gameObject);
 private:
   static unique_ptr<Gold> instance;
 };

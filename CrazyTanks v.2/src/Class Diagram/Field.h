@@ -55,17 +55,17 @@ public:
   /**
    * @param projectile
    */
-  void removeProjectile (const Projectile& projectile);
+  void removeProjectile (Projectile& projectile);
 
   /**
    * @param enemy
    */
-  void addEnemy (const Tank enemy);
+  void addEnemy (const Tank& enemy);
 
   /**
    * @param enemy
    */
-  void removeEnemy (const Tank enemy);
+  void removeEnemy (Tank& enemy);
 
   /**
    * @param wall
@@ -75,7 +75,7 @@ public:
   /**
    * @param wall
    */
-  void removeWall (const Wall& wall);
+  void removeWall (Wall& wall);
 
   const int getWallSize () const;
 

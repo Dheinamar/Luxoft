@@ -58,6 +58,7 @@ private:
   const int FIELD_BORDER = 15;
   const int CAPTION_SIZE = 35;
   const int CELL_SIZE = 40;
+  const int STRING_LENGTH = 4;
   unique_ptr<DrawInfo> drawInfo_;
   unique_ptr<DrawObjectStrategy> drawStrategy_;
 

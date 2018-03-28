@@ -58,7 +58,7 @@ Drawer::drawField ()
   auto projectiles = drawInfo_->getProjectiles ();
   setDrawStrategy (DrawProjectileStrategy ());
   for (auto i = 0; i < projectiles.size (); ++i) {
-    drawObject (dynamic_cast<GameObject&>(projectiles[i]), BLACK);
+    drawObject (projectiles[i], BLACK);
   }
 
   auto walls = drawInfo_->getWalls ();
@@ -129,10 +129,13 @@ void Drawer::drawUi ()
 
 }
 
-void Drawer::drawStats ()
+void
+Drawer::drawStats ()
 {
   const auto FIELD_SIZE = drawInfo_->getSize ();
-  char* health, *score, *time;
+  char* health = new char[STRING_LENGTH + 1],
+    *score = new char[STRING_LENGTH + 1],
+    *time = new char[STRING_LENGTH + 1];
   _itoa (drawInfo_->getPlayer ()->getHealth (), health, 10);
   _itoa (drawInfo_->getMaxEnemies (), score, 10);
   _itoa (drawInfo_->getTime (), time, 10);

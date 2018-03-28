@@ -10,6 +10,7 @@
 #include "Tank.h"
 #include "Wall.h"
 #include "Gold.h"
+#include "Projectile.h"
 
 class DrawInfo {
 public: 

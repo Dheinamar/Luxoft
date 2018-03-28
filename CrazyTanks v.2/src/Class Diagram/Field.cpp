@@ -36,34 +36,42 @@ Field::getInstance ()
 void
 Field::addProjectile (const Projectile& projectile)
 {
-
+  projectiles_.push_back (projectile);
 }
 
 /**
  * @param projectile
  */
 void
-Field::removeProjectile (const Projectile& projectile)
+Field::removeProjectile (Projectile& projectile)
 {
-
+  for (auto i = projectiles_.begin (); i != projectiles_.end (); i++) {
+    if (projectile == *i) {
+      projectiles_.erase (i);
+    }
+  }
 }
 
 /**
  * @param enemy
  */
 void
-Field::addEnemy (Tank enemy)
+Field::addEnemy (const Tank& enemy)
 {
-
+  enemies_.push_back (enemy);
 }
 
 /**
  * @param enemy
  */
 void
-Field::removeEnemy (Tank enemy)
+Field::removeEnemy (Tank& enemy)
 {
-
+  for (auto i = enemies_.begin (); i != enemies_.end (); i++) {
+    if (enemy == *i) {
+      enemies_.erase (i);
+    }
+  }
 }
 
 /**
@@ -72,26 +80,32 @@ Field::removeEnemy (Tank enemy)
 void
 Field::addWall (const Wall& wall)
 {
-
+  walls_.push_back (wall);
 }
 
 /**
  * @param wall
  */
 void
-Field::removeWall (const Wall& wall)
+Field::removeWall (Wall& wall)
 {
-
+  for (auto i = walls_.begin (); i != walls_.end (); i++) {
+    if (wall == *i) {
+      walls_.erase (i);
+    }
+  }
 }
 
-const int Field::getWallSize () const
+const int
+Field::getWallSize () const
 {
-  return 0;
+  return WALL_SIZE;
 }
 
-Cell & Field::operator[](pair<int, int> indices) const
+Cell &
+Field::operator[](pair<int, int> indices) const
 {
-  // TODO: insert return statement here
+  return field_[indices.first][indices.second];
 }
 
 /**
@@ -100,7 +114,7 @@ Cell & Field::operator[](pair<int, int> indices) const
 void
 Field::SetCreationStrategy (const CreateObjectStrategy& strategy)
 {
-
+  creationStrategy_.reset(const_cast<CreateObjectStrategy*>(&strategy));
 }
 
 void Field::createFortress ()
@@ -132,11 +146,18 @@ Field::Field ()
   createFortress ();
   SetCreationStrategy (CreateWallStrategy ());
   for (auto i = 0; i < N_WALLS; i++) {
-    creationStrategy_->CreateObject (walls_[0]);
+    auto wall = creationStrategy_->CreateObject (walls_[0]);
+    for (auto j = wall.begin(); j != wall.end(); j++) {
+      addWall (dynamic_cast<Wall&>(*j));
+    }
   }
   SetCreationStrategy (CreateEnemyStrategy ());
   for (auto i = 0; i < N_ENEMIES; i++) {
-    creationStrategy_->CreateObject (Tank(pair<int, int>(0, 0), 2));
+    auto enemy = creationStrategy_->CreateObject (Tank (pair<int, int> (0, 0),
+                                                        2));
+    for (auto j = enemy.begin (); j != enemy.end (); j++) {
+      addEnemy (dynamic_cast<Tank&>(*j));
+    }
   }
 }
 

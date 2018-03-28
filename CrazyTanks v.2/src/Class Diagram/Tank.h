@@ -35,7 +35,9 @@ public:
 
   GameObject& clone (pair<int, int> coordinates) override;
 
-  const int getHealth () const; 
+  const int getHealth () const;
+
+  bool operator==(const GameObject& gameObject) override;
 
 protected:
   void moveForward () override;

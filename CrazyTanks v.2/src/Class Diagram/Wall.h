@@ -29,6 +29,8 @@ public:
   void getDamaged (Projectile& projectile) override;
 
   GameObject& clone (pair<int, int> coordinates) override;
+
+  bool operator==(const GameObject& gameObject) override;
 };
 
 #endif //_WALL_H;

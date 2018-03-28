@@ -8,11 +8,11 @@
 
 #include <utility>
 
-#include "Projectile.h"
 #include "Way.h"
 
 using namespace std;
 
+class Projectile;
 class GameObject {
 public: 
     
@@ -31,6 +31,8 @@ public:
     virtual void getDamaged(Projectile& projectile) = 0;
     
     virtual GameObject& clone(pair<int, int> coordinates) = 0;
+
+    virtual bool operator==(const GameObject& gamObject) = 0;
 };
 
 #endif //_GAMEOBJECT_H

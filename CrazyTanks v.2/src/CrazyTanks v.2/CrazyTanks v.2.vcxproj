@@ -138,7 +138,6 @@
     <ClInclude Include="..\Class Diagram\Gold.h" />
     <ClInclude Include="..\Class Diagram\MovingObject.h" />
     <ClInclude Include="..\Class Diagram\Projectile.h" />
-    <ClInclude Include="..\Class Diagram\Shell.h" />
     <ClInclude Include="..\Class Diagram\Tank.h" />
     <ClInclude Include="..\Class Diagram\TankCommand.h" />
     <ClInclude Include="..\Class Diagram\Wall.h" />
@@ -157,7 +156,7 @@
     <ClCompile Include="..\Class Diagram\Field.cpp" />
     <ClCompile Include="..\Class Diagram\Game.cpp" />
     <ClCompile Include="..\Class Diagram\Gold.cpp" />
-    <ClCompile Include="..\Class Diagram\Shell.cpp" />
+    <ClCompile Include="..\Class Diagram\Projectile.cpp" />
     <ClCompile Include="..\Class Diagram\Tank.cpp" />
     <ClCompile Include="..\Class Diagram\Wall.cpp" />
     <ClCompile Include="..\Class Diagram\DrawEnemyStrategy.cpp" />
