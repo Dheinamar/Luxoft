@@ -13,6 +13,8 @@ class Tank : public MovingObject
 {
 public:
 
+  Tank (pair<int, int> coordinates, int team);
+
   void shoot ();
 
   void moveUp ();
@@ -39,10 +41,10 @@ protected:
   void moveForward () override;
 
   int health_;
-  static const int TEAM = 0;
+  const int TEAM = 0;
   pair<int, int> coordinates_;
 private:
-  static const int MAX_HEALTH;
+  const int MAX_HEALTH;
 
   void turnUp ();
 

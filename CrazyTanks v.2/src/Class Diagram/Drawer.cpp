@@ -53,7 +53,7 @@ Drawer::drawField ()
   drawObject (drawInfo_->getGold (), GOLD);
 
   setDrawStrategy (DrawPlayerStrategy ());
-  drawObject (drawInfo_->getPlayer (), BLUE);
+  drawObject (*drawInfo_->getPlayer (), BLUE);
 
   auto projectiles = drawInfo_->getProjectiles ();
   setDrawStrategy (DrawProjectileStrategy ());
@@ -133,7 +133,7 @@ void Drawer::drawStats ()
 {
   const auto FIELD_SIZE = drawInfo_->getSize ();
   char* health, *score, *time;
-  _itoa (drawInfo_->getPlayer ().getHealth (), health, 10);
+  _itoa (drawInfo_->getPlayer ()->getHealth (), health, 10);
   _itoa (drawInfo_->getMaxEnemies (), score, 10);
   _itoa (drawInfo_->getTime (), time, 10);
 

@@ -15,15 +15,19 @@
 #include "Cell.h"
 #include "Gold.h"
 #include "CreateObjectStrategy.h"
+#include "CreateWallStrategy.h"
+#include "CreateEnemyStrategy.h"
 
 
 class Field : public DrawInfo
 {
 public:
 
+  Field ();
+
   const vector<Projectile> getProjectiles () const override;
 
-  const vector<Tank> getEnemies () const override;
+  vector<Tank>& getEnemies () const override;
 
   const int getMaxEnemies () const override;
 
@@ -31,15 +35,17 @@ public:
 
   const Gold getGold () const override;
 
-  Tank getPlayer () override;
+  unique_ptr<Tank>& getPlayer () const override;
 
-  int getSize () override;
+  const int getSize () const override;
 
-  int getTime () override;
+  const int getTime () const override;
+
+  void setTime (const int time);
 
   Cell** getField ();
 
-  static unique_ptr<Field> getInstance ();
+  static unique_ptr<Field>& getInstance ();
 
   /**
    * @param projectile
@@ -64,12 +70,12 @@ public:
   /**
    * @param wall
    */
-  void addWall (const Wall wall);
+  void addWall (const Wall& wall);
 
   /**
    * @param wall
    */
-  void removeWall (const Wall wall);
+  void removeWall (const Wall& wall);
 
   const int getWallSize () const;
 
@@ -80,10 +86,12 @@ private:
   static const int N_WALLS = 6;
   static const int WALL_SIZE = 2;
   static const int N_ENEMIES = 6;
-  Cell field_[FIELD_SIZE][FIELD_SIZE];
+  static const pair<int, int> PLAYER_COORDINATES;
+  int time_;
+  Cell** field_;
   static unique_ptr<Field> instance_;
   vector<Tank> enemies_;
-  Tank player_;
+  static unique_ptr<Tank> player_;
   vector<Wall> walls_;
   Gold gold_;
   vector<Projectile> projectiles_;
@@ -93,6 +101,8 @@ private:
    * @param strategy
    */
   void SetCreationStrategy (const CreateObjectStrategy& strategy);
+
+  void createFortress ();
 };
 
 #endif //_FIELD_H

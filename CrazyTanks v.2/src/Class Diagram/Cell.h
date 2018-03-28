@@ -34,7 +34,7 @@ public:
     void clear();
 private: 
     shared_ptr<GameObject> content_;
-    const pair<int, int> COORDINATES_;
+    pair<int, int> COORDINATES_;
 };
 
 #endif //_CELL_H

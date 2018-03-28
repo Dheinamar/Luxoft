@@ -6,6 +6,8 @@
 #ifndef _GOLD_H
 #define _GOLD_H
 
+#include <memory>>
+
 #include "GameObject.h"
 
 
