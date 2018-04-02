@@ -77,6 +77,33 @@ Game::controlAi ()
           j->execute (Command::SHOOT);
           break;
         }
+
+        if (coordinates.first < target.first &&
+            coordinates.second < target.second) {
+          // Probably should take this out of if.
+          auto targetVectorX = abs (coordinates.first - target.first),
+            targetVectorY = abs (coordinates.second - target.second);
+          const int DISTANCE = static_cast<const int>(
+            sqrt (pow (targetVectorX, 2) +
+                  pow (targetVectorX, 2)));
+
+          auto axisXVectorX = abs (coordinates.first + DISTANCE - target.first),
+            axisXVectorY = abs (coordinates.second - target.second),
+            axisYVectorX = abs (coordinates.first - target.first),
+            axisYVectorY = abs (coordinates.second + DISTANCE - target.second);
+          const int AXIS_X_DISTANCE = static_cast<const int>(
+            sqrt (pow (axisXVectorX, 2) +
+                  pow (axisXVectorY, 2))),
+            AXIS_Y_DISTANCE = static_cast<const int>(
+              sqrt (pow (axisYVectorX, 2) +
+                    pow (axisYVectorY, 2)));
+          if (AXIS_X_DISTANCE < AXIS_Y_DISTANCE) {
+            j->execute (Command::MOVE_RIGHT);
+          }
+          else {
+            j->execute (Command::MOVE_DOWN);
+          }
+        }
       }
     }
   }
